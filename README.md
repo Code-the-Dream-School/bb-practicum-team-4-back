@@ -1,29 +1,46 @@
-# Back-End Repo for Team 2 of Baboon/Bald Eagle Practicum
+# Back end for Code The Dream practicum project for team 4
 
-This will be the API for bb-practicum-team-2-front React app.
+The repo is designated for backend for the practicum project for team 4.
 
-These instructions are for the **front-end team** so they can setup their local development environment to run 
-both the back-end server and their front-end app. You can go through these steps during your first group meeting 
-in-case you need assistance from your mentors.
+## Pre-requisites
 
->The back-end server will be running on port 8000. The front-end app will be running on port 3000. You will need to run both the back-end server and the front-end app at the same time to test your app.
+- Install [Node.js](https://nodejs.org/en/).
 
-### Setting up local development environment
+## Getting started
 
-1. Create a folder to contain both the front-end and back-end repos 
-2. Clone this repository to that folder
-3. Run `npm install` to install dependencies
-4. Pull the latest version of the `main` branch (when needed)
-5. Run `npm run dev` to start the development server
-6. Open http://localhost:8000/api/v1/ with your browser to test.
-7. Your back-end server is now running. You can now run the front-end app.
+- Clone the repository.
 
-#### Running the back-end server in Visual Studio Code
+```bash
+git clone https://github.com/Code-the-Dream-School/bb-practicum-team-4-back
+```
 
-![vsc running](images/back-end-running-vsc.png)
+- Install dependencies.
 
-#### Testing the back-end server API in the browser
+```bash
+cd bb-practicum-team-4-back
+npm install
+```
 
-![browser server](images/back-end-running-browser.png)
+- Build and run the project.
 
->Update the .node-version file to match the version of Node.js the **team** is using. This is used by Render.com to [deploy the app](https://render.com/docs/node-version).
+```bash
+npm run dev
+```
+
+Navigate to `http://localhost:8000`
+
+## User stories
+
+- User should be able to
+    - login or create an account
+    - see a list of products
+    - search for a product
+    - add product to cart
+- For MVP - the cart will not persist
+- User should be able to checkout
+- Checkout page takes shipping and billing info
+- Payment information (?)
+- Place order
+- After an order is placed it automatically goes into “completed” status
+- A logged in user is able to access order history
+- User should not be able to access order history if not logged in
