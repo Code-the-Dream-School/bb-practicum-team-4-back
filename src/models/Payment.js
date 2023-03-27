@@ -15,7 +15,7 @@ const PaymentSchema = new mongoose.Schema(
                 type: Number,
             },
             expirationDate: {
-                type: Number,
+                type: Date,
                 required: true
             },
             securityCode: {
