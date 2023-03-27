@@ -46,5 +46,4 @@ module.exports = {
     getAllOrders, 
     getOrder, 
     deleteOrder,
-
 }
