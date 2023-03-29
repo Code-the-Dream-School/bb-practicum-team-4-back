@@ -9,6 +9,7 @@ const authRouter = require('./routes/auth')
 
 const ordersRouter = require('./routes/order')
 const paymentsRouter = require('./routes/payment')
+const productsRouter = require('./routes/product')
 
 // middleware
 app.use(cors());
@@ -23,6 +24,8 @@ app.use('/api/v1', mainRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/orders', ordersRouter);
 app.use('/api/v1/payments', paymentsRouter);
+app.use('/api/v1/products', productsRouter);
+
 
 
 module.exports = app;
