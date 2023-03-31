@@ -3,6 +3,8 @@ const app = express();
 const cors = require('cors')
 const favicon = require('express-favicon');
 const logger = require('morgan');
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('../swagger-output.json')
 
 const mainRouter = require('./routes/mainRouter.js');
 const authRouter = require('./routes/auth')
@@ -10,6 +12,7 @@ const authRouter = require('./routes/auth')
 const ordersRouter = require('./routes/order')
 const paymentsRouter = require('./routes/payment')
 const productsRouter = require('./routes/product')
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 // middleware
 app.use(cors());
