@@ -22,10 +22,12 @@ app.use(logger('dev'));
 app.use(express.static('public'))
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
+const authenticateUser = require('../src/middleware/authentication');
+
 // routes
 app.use('/api/v1', mainRouter);
 app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/orders', ordersRouter);
+app.use('/api/v1/orders', authenticateUser, ordersRouter);
 app.use('/api/v1/payments', paymentsRouter);
 app.use('/api/v1/products', productsRouter);
 
