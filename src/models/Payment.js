@@ -12,10 +12,10 @@ const PaymentSchema = new mongoose.Schema(
                 required: true
             },
             cardNumber: {
-                type: Number,
+                type: String,/// Number type wasn't working I assume due to the spaces in between the numbers
             },
             expirationDate: {
-                type: Date,
+                type: Date, //date type needs to be fixed to a mm/yyyy format
                 required: true
             },
             securityCode: {
