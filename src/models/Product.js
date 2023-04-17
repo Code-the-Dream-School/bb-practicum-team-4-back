@@ -1,23 +1,34 @@
 const mongoose = require('mongoose')
 
 const ProductSchema = new mongoose.Schema({
-    // productId: {
-    //     type: String,
-    //     unique: [true, 'That productId already exists'],
-    //     required: [true, 'Please provide ProductID'],
-    //     maxlength: 50,
-    //     minlength: 1,
-    // },
-    productName: {
+    title: {
         type: String,
-        required: [true, 'Please provide Product Name'],
+        required: [true, 'Please provide Product Title'],
         maxlength: 50,
         minlength: 3,
     },
-    productPrice: {
+    category: {
+        type: String,
+        required: [true, 'Please provide Product Category'],
+        maxlength: 50,
+        minlength: 3,
+    },
+    description: {
+        type: String,
+        required: [true, 'Please provide Product Description'],
+        maxlength: 350,
+        minlength: 3,
+    },
+    price: {
         type: Number,
-        required: [true, ' Please provide Product Price!'],
-    }
+        required: [true, ' Please provide Product Price'],
+    },
+    img: {
+        type: String,
+        required: [true, 'Please provide Product Image URL'],
+        maxlength: 300,
+        minlength: 10,
+    },
 })
 
 
