@@ -39,26 +39,19 @@ describe('Order', () => {
                     price: 300
                 }],
                 bill: 300,
-                shippingInfo: {
-                    firstName: "John",
-                    lastName: "Doe",
-                    email: "johndoe@gmail.com",
-                    address: {
-                        addressLine1: "5678 street drive",
-                        addressLine2: "Apt B",
-                        city: "Raleigh",
-                        state: "NC",
-                        zipCode: 12345,
-                        country: "USA"
-                    }
-                },
-                paymentInfo: {
-                    cardHolder: "John Doe",
-                    cardNumber: 2233,
-                    expirationMonth: 02,
-                    expirationYear: 2026,
-                    ccv: 123
-                },
+                firstName: "John",
+                lastName: "Doe",
+                email: "johndoe@gmail.com",
+                address: "5678 street drive",
+                city: "Raleigh",
+                state: "NC",
+                zipCode: 12345,
+                country: "USA",
+                cardHolder: "John Doe",
+                cardNumber: 2233,
+                expirationMonth: 02,
+                expirationYear: 2026,
+                ccv: 123
             })
             .end((err, res) => {
                 res.should.have.status(201)
