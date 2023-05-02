@@ -12,6 +12,7 @@ const authRouter = require('./routes/auth')
 const ordersRouter = require('./routes/order')
 const paymentsRouter = require('./routes/payment')
 const productsRouter = require('./routes/product')
+const changePassRouter = require('./routes/changePass')
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 // middleware
@@ -30,7 +31,8 @@ app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/orders', authenticateUser, ordersRouter);
 app.use('/api/v1/payments', authenticateUser, paymentsRouter);
 app.use('/api/v1/products', productsRouter);
+app.use('/api/v1/changePass', authenticateUser, changePassRouter);
 
 
 
-module.exports =  app ;
+module.exports = app;
