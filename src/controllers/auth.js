@@ -5,9 +5,7 @@ const { BadRequestError, UnauthenticatedError } = require('../errors')
 const register = async (req, res) => {
     console.log(res)
     try {
-
         const { email, username } = req.body
-
         if (!email || !username) {
             throw new BadRequestError('Please provide email and password')
         }
