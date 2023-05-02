@@ -35,7 +35,7 @@ const getProduct = async (req, res) => {
             _id: productId,
         })
         if (!product) {
-            throw new NotFoundError(`No link with id ${id}`)
+            throw new NotFoundError(`No product with id ${id}`)
         }
         res.status(StatusCodes.OK).json({ product })
     } catch (err) {
