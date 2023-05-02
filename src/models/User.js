@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
     },
     username: {
         type: String,
-        required: [true, 'Please provide username'],
+        // required: [true, 'Please provide username'],
         unique: [true, 'That username already exists'],
         maxlength: 50,
         minlength: 3,
