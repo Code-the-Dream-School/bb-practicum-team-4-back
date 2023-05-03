@@ -48,7 +48,7 @@ const login = async (req, res) => {
         }
         // compare password
         const token = user.createJWT()
-        res.status(StatusCodes.OK).json({ user: { name: user.name, id: user._id }, token })
+        res.status(StatusCodes.OK).json({ user: { name: user.name, email: user.email, id: user._id }, token })
     } catch (error) {
         console.log(error)
     }
@@ -80,7 +80,6 @@ const removeUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try {
-        console.log(req.body);
         const { emailToEdit, name, username, email, password } = req.body
         console.log("eamilToEdit", emailToEdit);
 
