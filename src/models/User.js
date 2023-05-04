@@ -9,13 +9,13 @@ const UserSchema = new mongoose.Schema({
         maxlength: 50,
         minlength: 3,
     },
-    username: {
-        type: String,
-        // required: [true, 'Please provide username'],
-        unique: [true, 'That username already exists'],
-        maxlength: 50,
-        minlength: 3,
-    },
+    // username: {
+    //     type: String,
+    //     // required: [true, 'Please provide username'],
+    //     unique: [true, 'That username already exists'],
+    //     maxlength: 50,
+    //     minlength: 3,
+    // },
     email: {
         type: String,
         required: [true, 'Please provide email'],
@@ -39,7 +39,11 @@ UserSchema.pre('save', async function () {
 
 UserSchema.methods.createJWT = function () {
     return jwt.sign(
-        { userId: this._id, name: this.name, username: this.username },
+        {
+            userId: this._id,
+            name: this.name,
+            // username: this.username
+        },
         process.env.JWT_SECRET,
         {
             expiresIn: process.env.JWT_LIFETIME,

@@ -23,7 +23,7 @@ const changePassFunction = async (req, res) => {
         }
 
         if (email === '' && newPassword === '') {
-            throw new BadRequestError('Provide values to name, username, email, password')
+            throw new BadRequestError('Provide values to name, email, password')
         }
         console.log("okay");
         // Password encryption
