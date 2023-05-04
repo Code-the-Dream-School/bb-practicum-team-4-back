@@ -3,11 +3,11 @@ const mongoose= require('mongoose');
 const OrderSchema = new mongoose.Schema(
     {
         products: [{
-                productId: {
+                _id: {
                     type: String,
                     required: true
                 },
-                name:{
+                title:{
                     type: String,
                     required: true
                 },
@@ -20,10 +20,22 @@ const OrderSchema = new mongoose.Schema(
                     required: true
                 }
             }],
-        bill: {
+        subtotal: {
             type: Number,
             required: true, 
             default: 0
+        },
+        tax: {
+            type: Number,
+            default: function() {
+                return this.subtotal * 0.0699
+            }
+        },
+        total: {
+            type: Number,
+            default: function() {
+                return this.subtotal + this.tax
+            }
         },
         firstName: {
             type: String,
@@ -89,5 +101,11 @@ const OrderSchema = new mongoose.Schema(
     },
     { timestamps: true }
 )
+
+// OrderSchema.virtual('subsubtotal').get(function () {
+//     return for (let i = 0; i < this.products.price.length ; i++ ) {
+
+//     }
+// });
 
 module.exports = mongoose.model('Order', OrderSchema)
