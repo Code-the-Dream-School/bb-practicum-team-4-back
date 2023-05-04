@@ -3,28 +3,33 @@ const { StatusCodes } = require('http-status-codes')
 const { BadRequestError, UnauthenticatedError } = require('../errors')
 
 const register = async (req, res) => {
-    console.log(res)
+
     try {
-        const { email, username } = req.body
-        if (!email || !username) {
-            throw new BadRequestError('Please provide email and password')
+        const { name, email, password } = req.body
+        if (!email || !name || !password) {
+            throw new BadRequestError('Please provide Name, Email and Password')
         }
-        const userByEmail = await User.findOne({ email })
+        const userByEmail = await User.findOne({ email }).select('-username');
         if (userByEmail) {
             throw new BadRequestError('Email already exist, use different one')
-            console.log(res)
+
             // res.status(StatusCodes.BAD_REQUEST).json({ msg: 'Email already exist, use different one' })
         }
-        const userByUsername = await User.findOne({ username })
 
-        if (userByUsername) {
-            throw new BadRequestError('Username already exist, use different one')
+        // const userByUsername = await User.findOne({ username })
 
-            // res.status(StatusCodes.BAD_REQUEST).json({ msg: 'Username already exist, use different one' })
-        }
-        const user = await User.create({ ...req.body })
+        // if (userByUsername) {
+        //     throw new BadRequestError('Username already exist, use different one')
+
+        //     // res.status(StatusCodes.BAD_REQUEST).json({ msg: 'Username already exist, use different one' })
+        // }
+        const user = await User.create({ name: req.body.name, email: req.body.email, password: req.body.password })
+
         const token = user.createJWT()
+
+        console.log("Name: " + user.name + " was registered successfully!")
         res.status(StatusCodes.CREATED).json({ user: { name: user.name }, token })
+
     } catch (error) {
         console.log(error)
     }
@@ -80,7 +85,7 @@ const removeUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try {
-        const { emailToEdit, name, username, email, password } = req.body
+        const { emailToEdit, name, email, password } = req.body
         console.log("eamilToEdit", emailToEdit);
 
         if (!emailToEdit) {
@@ -93,8 +98,8 @@ const updateUser = async (req, res) => {
             throw new UnauthenticatedError('Invalid Credentials')
         }
 
-        if (name === '' && username === '' && email === '' && password === '') {
-            throw new BadRequestError('Provide values to name, username, email, password')
+        if (name === '' && email === '' && password === '') {
+            throw new BadRequestError('Provide values to name, email, password')
         }
         console.log("okay");
         const updatedUser = await User.findByIdAndUpdate(
