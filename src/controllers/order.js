@@ -12,7 +12,6 @@ const createOrder = async (req, res) => {
     res.status(StatusCodes.CREATED).json({order})
 }
 const getAllOrders = async (req, res) => {
-    const {params: {id: userId}} = req
     const orders = await Order.find({createdBy: req.user.userId}).sort('createdAt')
     res.status(StatusCodes.OK).json({orders, count:orders.length})
 }
