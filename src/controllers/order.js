@@ -15,6 +15,17 @@ const getAllOrders = async (req, res) => {
     const orders = await Order.find({createdBy: req.user.userId}).sort('createdAt')
     res.status(StatusCodes.OK).json({orders, count:orders.length})
 }
+const getAllOrdersUnauth = async (req, res) => {
+    const {
+        params: {id: userId}
+    } = req
+    const orders = await Order.find({createdBy: userId}).sort('createdAt')
+    if(!orders) {
+        throw new NotFoundError(`The orders for user ${userId} were not found.`)
+    }
+    res.status(StatusCodes.OK).json({orders, count:orders.length})
+}
+
 const getOrder = async (req, res) => {
     const {
         user: {userId},
@@ -50,4 +61,5 @@ module.exports = {
     getAllOrders, 
     getOrder, 
     deleteOrder,
+    getAllOrdersUnauth
 }
