@@ -56,6 +56,7 @@ const login = async (req, res) => {
         res.status(StatusCodes.OK).json({ user: { name: user.name, email: user.email, id: user._id }, token })
     } catch (error) {
         console.log(error)
+        res.status(StatusCodes.UNAUTHORIZED).json({ error: "401 Unauthorized - invalid credentials." })
     }
 }
 
