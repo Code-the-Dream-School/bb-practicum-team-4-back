@@ -7,8 +7,7 @@ const  {
     deleteOrder
 } = require('../controllers/order')
 
-router.route('/').post(createOrder)
-router.route('/user/:id').get(getAllOrders)
+router.route('/').post(createOrder).get(getAllOrders)
 router.route('/:id').get(getOrder).delete(deleteOrder)
 
 

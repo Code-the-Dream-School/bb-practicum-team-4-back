@@ -10,6 +10,7 @@ const mainRouter = require('./routes/mainRouter.js');
 const authRouter = require('./routes/auth')
 
 const ordersRouter = require('./routes/order')
+const allOrdersRouter = require('./routes/orders')
 const paymentsRouter = require('./routes/payment')
 const productsRouter = require('./routes/product')
 const changePassRouter = require('./routes/changePass')
@@ -30,6 +31,7 @@ const authenticateUser = require('../src/middleware/authentication');
 app.use('/api/v1', mainRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/orders', authenticateUser, ordersRouter);
+app.use('/api/v1/allOrders', allOrdersRouter);
 app.use('/api/v1/payments', authenticateUser, paymentsRouter);
 app.use('/api/v1/products', productsRouter);
 app.use('/api/v1/getUsers', getUsersRouter);
