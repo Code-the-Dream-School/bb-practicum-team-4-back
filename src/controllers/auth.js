@@ -1,38 +1,55 @@
 const User = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
-const { BadRequestError, UnauthenticatedError } = require('../errors')
+const { BadRequestError, UnauthenticatedError, CustomAPIError } = require('../errors')
 
 const register = async (req, res) => {
 
+    let errMsg = "";
     try {
         const { name, email, password } = req.body
-        if (!email || !name || !password) {
-            throw new BadRequestError('Please provide Name, Email and Password')
+        if (!name) {
+            console.log("***** Provide Name  *****")
+            errMsg += " Provide Name, "
+            // throw new Exception(" Name ");
+            // res.status(StatusCodes.BAD_REQUEST).json({ error: "***** Erorr: Provide Name  *****" })
+        }
+        if (!password) {
+            console.log("***** Provide Password  *****")
+            errMsg += " Provide Password, "
+            // res.status(StatusCodes.BAD_REQUEST).json({ error: "***** Erorr: Provide Password  *****" })
+        }
+        if (!email) {
+            // throw new BadRequestError('Please provide Email')
+            console.log("***** Provide Email  *****")
+            errMsg += " Provide Email, "
+            throw new Exception(errMsg);
+            // throw new Exception("Email ");
+            // res.status(StatusCodes.BAD_REQUEST).json({ error: "***** Erorr: Provide Email  *****" })
         }
         const userByEmail = await User.findOne({ email }).select('-username');
         if (userByEmail) {
-            throw new BadRequestError('Email already exist, use different one')
-
-            // res.status(StatusCodes.BAD_REQUEST).json({ msg: 'Email already exist, use different one' })
+            // throw new BadRequestError('Email already exist, use different one')
+            console.log("***** Email already exist *****")
+            errMsg += " Email already exist, "
+            throw new Exception(errMsg);
+            // res.status(StatusCodes.BAD_REQUEST).json({ error: "***** Erorr: Email already exist, use different one or login *****" })
         }
-
-        // const userByUsername = await User.findOne({ username })
-
-        // if (userByUsername) {
-        //     throw new BadRequestError('Username already exist, use different one')
-
-        //     // res.status(StatusCodes.BAD_REQUEST).json({ msg: 'Username already exist, use different one' })
-        // }
+        console.log('REGISTERING USER NOW !!')
         const user = await User.create({ name: req.body.name, email: req.body.email, password: req.body.password })
-
         const token = user.createJWT()
 
-        console.log("Name: " + user.name + " was registered successfully!")
+        console.log("*****  " + user.name + " REGISTERED!  *****")
         res.status(StatusCodes.CREATED).json({ user: { name: user.name }, token })
 
-    } catch (error) {
-        console.log(error)
+
+
+    } catch (err) {
+        // console.log(err)
+        res.status(StatusCodes.BAD_REQUEST).json({ error: errMsg })
     }
+
+
+
 }
 
 const login = async (req, res) => {
